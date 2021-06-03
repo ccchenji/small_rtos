@@ -1,0 +1,1019 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    06/03/2021  20:39:15  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+D:\KEIL\C51\BIN\BL51.EXE .\Objects\os_rtos_malloc.obj, .\Objects\small_rtos_list.obj, .\Objects\small_rtos_hardware.obj,
+>>  .\Objects\small_rtos_core.obj, .\Objects\small_rtos.obj, .\Objects\small_rtos_main.obj TO .\Objects\small_rtos PRINT
+>>  (.\Listings\small_rtos.m51) RAMSIZE (256) XDATA (0X0000-0X06FF)
+
+
+MEMORY MODEL: LARGE
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\os_rtos_malloc.obj (OS_RTOS_MALLOC)
+  .\Objects\small_rtos_list.obj (SMALL_RTOS_LIST)
+  .\Objects\small_rtos_hardware.obj (SMALL_RTOS_HARDWARE)
+  .\Objects\small_rtos_core.obj (SMALL_RTOS_CORE)
+  .\Objects\small_rtos.obj (SMALL_RTOS)
+  .\Objects\small_rtos_main.obj (SMALL_RTOS_MAIN)
+  D:\KEIL\C51\LIB\C51L.LIB (?C_INIT)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?COPY)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?CLDPTR)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?CLDOPTR)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?CSTPTR)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?CSTOPTR)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?IILDX)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?ILDPTR)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?IILDPTR)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?ISTPTR)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?ULSHR)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?LSTXDATA)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?PLDPTR)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?PSTPTR)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?PLDOPTR)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?PSTOPTR)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?ICALL)
+  D:\KEIL\C51\LIB\C51L.LIB (PRINTF)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?PLDIDATA)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?PSTIDATA)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?PLDXDATA)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?PLDIXDATA)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?PSTXDATA)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?PLDPDATA)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?PSTPDATA)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?PLDCODE)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?CCASE)
+
+
+LINK MAP OF MODULE:  .\Objects\small_rtos (OS_RTOS_MALLOC)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0005H     UNIT         _DATA_GROUP_
+                    000DH     0013H                  *** GAP ***
+            BIT     0020H.0   0001H.1   UNIT         _BIT_GROUP_
+                    0021H.1   0000H.7                *** GAP ***
+            IDATA   0022H     0019H     UNIT         ?ID?SMALL_RTOS_CORE
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/03/2021  20:39:15  PAGE 2
+
+
+
+            * * * * * * *  X D A T A   M E M O R Y  * * * * * * *
+            XDATA   0000H     03EAH     UNIT         ?XD?OS_RTOS_MALLOC
+            XDATA   03EAH     0028H     UNIT         _XDATA_GROUP_
+            XDATA   0412H     0024H     UNIT         ?XD?_TASKCREATE?SMALL_RTOS_CORE
+            XDATA   0436H     000CH     UNIT         ?XD?_LISTDELETE?SMALL_RTOS_LIST
+            XDATA   0442H     000CH     UNIT         ?XD?_NODEFIRSTTOLAST?SMALL_RTOS_LIST
+            XDATA   044EH     0009H     UNIT         ?XD?_OSFREE?OS_RTOS_MALLOC
+            XDATA   0457H     0009H     UNIT         ?XD?_DESTROYLIST?SMALL_RTOS_LIST
+            XDATA   0460H     0009H     UNIT         ?XD?_CLEARLIST?SMALL_RTOS_LIST
+            XDATA   0469H     0009H     UNIT         ?XD?_LISTAPPEND?SMALL_RTOS_LIST
+            XDATA   0472H     0008H     UNIT         ?XD?_OSMALLOC?OS_RTOS_MALLOC
+            XDATA   047AH     0008H     UNIT         ?XD?_SPLITMEMORY?OS_RTOS_MALLOC
+            XDATA   0482H     0008H     UNIT         ?XD?TASKSWITCH?SMALL_RTOS_CORE
+            XDATA   048AH     0006H     UNIT         ?XD?_COMPARELISTTYPE?SMALL_RTOS_LIST
+            XDATA   0490H     0006H     UNIT         ?XD?SMALL_RTOS_CORE
+            XDATA   0496H     0004H     UNIT         ?XD?_TIMER0INIT?SMALL_RTOS_HARDWARE
+            XDATA   049AH     0003H     UNIT         ?XD?MERGEMEMORY?OS_RTOS_MALLOC
+            XDATA   049DH     0003H     UNIT         ?XD?_INITLIST?SMALL_RTOS_LIST
+            XDATA   04A0H     0003H     UNIT         ?XD?_LISTFIRSTNODE?SMALL_RTOS_LIST
+            XDATA   04A3H     0003H     UNIT         ?XD?GETPOOLPID?SMALL_RTOS_CORE
+            XDATA   04A6H     0002H     UNIT         ?XD?TASK1?SMALL_RTOS_MAIN
+            XDATA   04A8H     0002H     UNIT         ?XD?TASK2?SMALL_RTOS_MAIN
+            XDATA   04AAH     0001H     UNIT         ?XD?_PUTCHAR?SMALL_RTOS_HARDWARE
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0108H     ABSOLUTE     
+            CODE    0108H     041FH     UNIT         ?C_INITSEG
+            CODE    0527H     03A4H     UNIT         ?C?LIB_CODE
+            CODE    08CBH     0365H     UNIT         ?PR?PRINTF?PRINTF
+            CODE    0C30H     0299H     UNIT         ?PR?_LISTAPPEND?SMALL_RTOS_LIST
+            CODE    0EC9H     0257H     UNIT         ?PR?_LISTDELETE?SMALL_RTOS_LIST
+            CODE    1120H     0234H     UNIT         ?PR?TASKSWITCH?SMALL_RTOS_CORE
+            CODE    1354H     019EH     UNIT         ?PR?_OSMALLOC?OS_RTOS_MALLOC
+            CODE    14F2H     0194H     UNIT         ?PR?_OSFREE?OS_RTOS_MALLOC
+            CODE    1686H     0169H     UNIT         ?PR?MERGEMEMORY?OS_RTOS_MALLOC
+            CODE    17EFH     0154H     UNIT         ?PR?_NODEFIRSTTOLAST?SMALL_RTOS_LIST
+            CODE    1943H     0134H     UNIT         ?PR?_CLEARLIST?SMALL_RTOS_LIST
+            CODE    1A77H     011AH     UNIT         ?PR?_SPLITMEMORY?OS_RTOS_MALLOC
+            CODE    1B91H     0106H     UNIT         ?PR?_DESTROYLIST?SMALL_RTOS_LIST
+            CODE    1C97H     00F5H     UNIT         ?PR?GETPOOLPID?SMALL_RTOS_CORE
+            CODE    1D8CH     00DDH     UNIT         ?PR?_INITLIST?SMALL_RTOS_LIST
+            CODE    1E69H     00C6H     UNIT         ?PR?_TASKCREATE?SMALL_RTOS_CORE
+            CODE    1F2FH     0080H     UNIT         ?C_C51STARTUP
+            CODE    1FAFH     006EH     UNIT         ?PR?MAIN?SMALL_RTOS_CORE
+            CODE    201DH     004EH     UNIT         ?PR?INITMEMORY?OS_RTOS_MALLOC
+            CODE    206BH     003FH     UNIT         ?PR?_COMPARELISTTYPE?SMALL_RTOS_LIST
+            CODE    20AAH     003CH     UNIT         ?PR?_LISTFIRSTNODE?SMALL_RTOS_LIST
+            CODE    20E6H     003AH     UNIT         ?PR?_TIMER0INIT?SMALL_RTOS_HARDWARE
+            CODE    2120H     0025H     UNIT         ?PR?TASK2?SMALL_RTOS_MAIN
+            CODE    2145H     0024H     UNIT         ?PR?TASK1?SMALL_RTOS_MAIN
+            CODE    2169H     001BH     UNIT         ?PR?_PUTCHAR?SMALL_RTOS_HARDWARE
+            CODE    2184H     0017H     UNIT         ?PR?UART1INIT?SMALL_RTOS_HARDWARE
+            CODE    219BH     0017H     UNIT         ?PR?SMALL_RTOS_MAIN?SMALL_RTOS_MAIN
+            CODE    21B2H     0010H     UNIT         ?PR?SMALLOSINIT?SMALL_RTOS_CORE
+            CODE    21C2H     000FH     UNIT         ?PR?HARDWAREINIT?SMALL_RTOS_HARDWARE
+            CODE    21D1H     000EH     UNIT         ?CO?SMALL_RTOS_MAIN
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/03/2021  20:39:15  PAGE 3
+
+
+            CODE    21DFH     0006H     UNIT         ?PR?TASKNUM?SMALL_RTOS_CORE
+            CODE    21E5H     0006H     UNIT         ?PR?SMALL_RTOS_SYSTEM_TASK?SMALL_RTOS_CORE
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\small_rtos (OS_RTOS_MALLOC)
+
+
+SEGMENT                                             BIT_GROUP          DATA_GROUP          XDATA_GROUP
+  +--> CALLED SEGMENT                            START    LENGTH     START    LENGTH     START    LENGTH
+--------------------------------------------------------------------------------------------------------
+?PR?TASKSWITCH?SMALL_RTOS_CORE                   -----    -----      -----    -----      -----    -----
+  +--> ?PR?_LISTFIRSTNODE?SMALL_RTOS_LIST
+  +--> ?PR?_NODEFIRSTTOLAST?SMALL_RTOS_LIST
+
+?PR?_NODEFIRSTTOLAST?SMALL_RTOS_LIST             -----    -----      -----    -----      -----    -----
+  +--> ?PR?_LISTFIRSTNODE?SMALL_RTOS_LIST
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP                                    -----    -----      -----    -----      -----    -----
+  +--> ?PR?MAIN?SMALL_RTOS_CORE
+  +--> ?C_INITSEG
+
+?PR?MAIN?SMALL_RTOS_CORE                         -----    -----      -----    -----      -----    -----
+  +--> ?PR?SMALLOSINIT?SMALL_RTOS_CORE
+  +--> ?PR?SMALL_RTOS_SYSTEM_TASK?SMALL_RTOS...
+  +--> ?PR?_TASKCREATE?SMALL_RTOS_CORE
+
+?PR?SMALLOSINIT?SMALL_RTOS_CORE                  -----    -----      -----    -----      -----    -----
+  +--> ?PR?HARDWAREINIT?SMALL_RTOS_HARDWARE
+  +--> ?PR?INITMEMORY?OS_RTOS_MALLOC
+  +--> ?PR?_INITLIST?SMALL_RTOS_LIST
+
+?PR?HARDWAREINIT?SMALL_RTOS_HARDWARE             -----    -----      -----    -----      -----    -----
+  +--> ?PR?UART1INIT?SMALL_RTOS_HARDWARE
+  +--> ?PR?_TIMER0INIT?SMALL_RTOS_HARDWARE
+
+?PR?_INITLIST?SMALL_RTOS_LIST                    -----    -----      -----    -----      -----    -----
+  +--> ?PR?_OSMALLOC?OS_RTOS_MALLOC
+
+?PR?_OSMALLOC?OS_RTOS_MALLOC                     -----    -----      -----    -----      -----    -----
+  +--> ?PR?INITMEMORY?OS_RTOS_MALLOC
+  +--> ?PR?_SPLITMEMORY?OS_RTOS_MALLOC
+
+?PR?SMALL_RTOS_SYSTEM_TASK?SMALL_RTOS...         -----    -----      -----    -----      -----    -----
+  +--> ?PR?SMALL_RTOS_MAIN?SMALL_RTOS_MAIN
+
+?PR?SMALL_RTOS_MAIN?SMALL_RTOS_MAIN              -----    -----      -----    -----      -----    -----
+  +--> ?PR?TASK1?SMALL_RTOS_MAIN
+  +--> ?PR?_TASKCREATE?SMALL_RTOS_CORE
+  +--> ?PR?TASK2?SMALL_RTOS_MAIN
+
+?PR?TASK1?SMALL_RTOS_MAIN                        -----    -----      -----    -----      -----    -----
+  +--> ?CO?SMALL_RTOS_MAIN
+  +--> ?PR?PRINTF?PRINTF
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/03/2021  20:39:15  PAGE 4
+
+
+?PR?PRINTF?PRINTF                                0020H.0  0001H.1    0008H    0005H      03EAH    0028H
+  +--> ?PR?_PUTCHAR?SMALL_RTOS_HARDWARE
+
+?PR?_TASKCREATE?SMALL_RTOS_CORE                  -----    -----      -----    -----      -----    -----
+  +--> ?PR?GETPOOLPID?SMALL_RTOS_CORE
+  +--> ?PR?_LISTAPPEND?SMALL_RTOS_LIST
+
+?PR?_LISTAPPEND?SMALL_RTOS_LIST                  -----    -----      -----    -----      -----    -----
+  +--> ?PR?_OSMALLOC?OS_RTOS_MALLOC
+
+?PR?TASK2?SMALL_RTOS_MAIN                        -----    -----      -----    -----      -----    -----
+  +--> ?CO?SMALL_RTOS_MAIN
+  +--> ?PR?PRINTF?PRINTF
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\small_rtos (OS_RTOS_MALLOC)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        OS_RTOS_MALLOC
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:1A77H         PUBLIC        _SplitMemory
+  C:201DH         PUBLIC        InitMemory
+  C:1354H         PUBLIC        _OsMalloc
+  X:0000H         PUBLIC        free_list
+  C:14F2H         PUBLIC        _OsFree
+  X:0002H         PUBLIC        os_memory
+  C:1686H         PUBLIC        MergeMemory
+  -------         PROC          INITMEMORY
+  C:201DH         LINE#         24
+  C:201DH         LINE#         25
+  C:201DH         LINE#         26
+  C:2029H         LINE#         27
+  C:203CH         LINE#         28
+  C:204DH         LINE#         29
+  C:206AH         LINE#         30
+  -------         ENDPROC       INITMEMORY
+  -------         PROC          _OSMALLOC
+  X:0472H         SYMBOL        malloc_size
+  -------         DO            
+  X:0474H         SYMBOL        curr
+  X:0477H         SYMBOL        result_addr
+  -------         ENDDO         
+  C:1354H         LINE#         40
+  C:135CH         LINE#         41
+  C:135CH         LINE#         45
+  C:136CH         LINE#         46
+  C:136FH         LINE#         47
+  C:1388H         LINE#         48
+  C:13C3H         LINE#         49
+  C:13C3H         LINE#         50
+  C:13F6H         LINE#         51
+  C:13F6H         LINE#         52
+  C:1415H         LINE#         53
+  C:1418H         LINE#         55
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/03/2021  20:39:15  PAGE 5
+
+
+  C:1418H         LINE#         56
+  C:141FH         LINE#         57
+  C:141FH         LINE#         58
+  C:1422H         LINE#         59
+  C:144AH         LINE#         60
+  C:144AH         LINE#         61
+  C:145FH         LINE#         62
+  C:147AH         LINE#         63
+  C:1486H         LINE#         64
+  C:1486H         LINE#         65
+  C:14AEH         LINE#         66
+  C:14AEH         LINE#         67
+  C:14C4H         LINE#         68
+  C:14DFH         LINE#         69
+  C:14EBH         LINE#         70
+  C:14EBH         LINE#         71
+  C:14F1H         LINE#         72
+  -------         ENDPROC       _OSMALLOC
+  -------         PROC          _SPLITMEMORY
+  X:047AH         SYMBOL        now_addr
+  X:047DH         SYMBOL        size
+  -------         DO            
+  X:047FH         SYMBOL        new_data
+  -------         ENDDO         
+  C:1A77H         LINE#         83
+  C:1A8AH         LINE#         84
+  C:1A8AH         LINE#         86
+  C:1AC0H         LINE#         87
+  C:1AF9H         LINE#         88
+  C:1B0FH         LINE#         89
+  C:1B3DH         LINE#         90
+  C:1B56H         LINE#         91
+  C:1B6BH         LINE#         92
+  C:1B90H         LINE#         93
+  -------         ENDPROC       _SPLITMEMORY
+  -------         PROC          _OSFREE
+  X:044EH         SYMBOL        now_addr
+  -------         DO            
+  X:0451H         SYMBOL        curr
+  -------         DO            
+  X:0454H         SYMBOL        now_ptr
+  -------         ENDDO         
+  -------         ENDDO         
+  C:14F2H         LINE#         103
+  C:14FDH         LINE#         104
+  C:14FDH         LINE#         106
+  C:1561H         LINE#         107
+  C:1561H         LINE#         108
+  C:1577H         LINE#         109
+  C:1582H         LINE#         110
+  C:15C8H         LINE#         111
+  C:15C8H         LINE#         112
+  C:1612H         LINE#         113
+  C:1612H         LINE#         114
+  C:1628H         LINE#         115
+  C:162BH         LINE#         116
+  C:162CH         LINE#         117
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/03/2021  20:39:15  PAGE 6
+
+
+  C:162CH         LINE#         118
+  C:165FH         LINE#         119
+  C:165FH         LINE#         120
+  C:167EH         LINE#         121
+  C:1681H         LINE#         123
+  C:1681H         LINE#         124
+  C:1682H         LINE#         125
+  C:1682H         LINE#         126
+  C:1685H         LINE#         127
+  C:1685H         LINE#         128
+  -------         ENDPROC       _OSFREE
+  -------         PROC          MERGEMEMORY
+  -------         DO            
+  X:049AH         SYMBOL        curr
+  -------         ENDDO         
+  C:1686H         LINE#         138
+  C:1686H         LINE#         139
+  C:1686H         LINE#         140
+  C:169FH         LINE#         141
+  C:16D5H         LINE#         142
+  C:16D5H         LINE#         143
+  C:1714H         LINE#         144
+  C:1714H         LINE#         145
+  C:175EH         LINE#         146
+  C:1795H         LINE#         147
+  C:1795H         LINE#         148
+  C:17C8H         LINE#         149
+  C:17EAH         LINE#         151
+  C:17EBH         LINE#         152
+  C:17EEH         LINE#         153
+  -------         ENDPROC       MERGEMEMORY
+  -------         ENDMOD        OS_RTOS_MALLOC
+
+  -------         MODULE        SMALL_RTOS_LIST
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:1943H         PUBLIC        _ClearList
+  C:1B91H         PUBLIC        _DestroyList
+  C:206BH         PUBLIC        _CompareListType
+  C:20AAH         PUBLIC        _ListFirstNode
+  C:1D8CH         PUBLIC        _InitList
+  C:17EFH         PUBLIC        _NodeFirstToLast
+  C:0EC9H         PUBLIC        _ListDelete
+  C:0C30H         PUBLIC        _ListAppend
+  -------         PROC          _INITLIST
+  X:049DH         SYMBOL        now_list
+  C:1D8CH         LINE#         19
+  C:1D97H         LINE#         20
+  C:1D97H         LINE#         21
+  C:1DC7H         LINE#         22
+  C:1DC7H         LINE#         24
+  C:1DE2H         LINE#         25
+  C:1E0FH         LINE#         26
+  C:1E12H         LINE#         27
+  C:1E35H         LINE#         28
+  C:1E4AH         LINE#         29
+  C:1E63H         LINE#         30
+  C:1E66H         LINE#         31
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/03/2021  20:39:15  PAGE 7
+
+
+  C:1E66H         LINE#         33
+  C:1E66H         LINE#         34
+  C:1E68H         LINE#         35
+  C:1E68H         LINE#         36
+  -------         ENDPROC       _INITLIST
+  -------         PROC          _DESTROYLIST
+  X:0457H         SYMBOL        now_list
+  -------         DO            
+  X:045AH         SYMBOL        node
+  X:045DH         SYMBOL        temp
+  -------         ENDDO         
+  C:1B91H         LINE#         46
+  C:1B9CH         LINE#         47
+  C:1B9CH         LINE#         50
+  C:1BEFH         LINE#         51
+  C:1BEFH         LINE#         52
+  C:1C11H         LINE#         53
+  C:1C22H         LINE#         54
+  C:1C3CH         LINE#         55
+  C:1C4CH         LINE#         56
+  C:1C4CH         LINE#         57
+  C:1C6BH         LINE#         58
+  C:1C79H         LINE#         59
+  C:1C8FH         LINE#         60
+  C:1C91H         LINE#         61
+  C:1C94H         LINE#         62
+  C:1C94H         LINE#         64
+  C:1C94H         LINE#         65
+  C:1C96H         LINE#         66
+  C:1C96H         LINE#         67
+  -------         ENDPROC       _DESTROYLIST
+  -------         PROC          _CLEARLIST
+  X:0460H         SYMBOL        now_list
+  -------         DO            
+  X:0463H         SYMBOL        ptr
+  X:0466H         SYMBOL        qtr
+  -------         ENDDO         
+  C:1943H         LINE#         77
+  C:194EH         LINE#         78
+  C:194EH         LINE#         80
+  C:199BH         LINE#         81
+  C:199BH         LINE#         82
+  C:19BAH         LINE#         83
+  C:19E4H         LINE#         84
+  C:19E4H         LINE#         85
+  C:1A03H         LINE#         86
+  C:1A11H         LINE#         87
+  C:1A27H         LINE#         88
+  C:1A29H         LINE#         89
+  C:1A3FH         LINE#         90
+  C:1A5FH         LINE#         91
+  C:1A71H         LINE#         92
+  C:1A74H         LINE#         93
+  C:1A74H         LINE#         95
+  C:1A76H         LINE#         96
+  -------         ENDPROC       _CLEARLIST
+  -------         PROC          _LISTAPPEND
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/03/2021  20:39:15  PAGE 8
+
+
+  X:0469H         SYMBOL        now_list
+  X:046CH         SYMBOL        dat
+  -------         DO            
+  X:046FH         SYMBOL        ptr
+  -------         ENDDO         
+  C:0C30H         LINE#         107
+  C:0C3BH         LINE#         108
+  C:0C3BH         LINE#         110
+  C:0C83H         LINE#         111
+  C:0C83H         LINE#         112
+  C:0CA2H         LINE#         113
+  C:0CD8H         LINE#         114
+  C:0CD8H         LINE#         115
+  C:0CF9H         LINE#         116
+  C:0D2CH         LINE#         117
+  C:0D2FH         LINE#         118
+  C:0D67H         LINE#         119
+  C:0D90H         LINE#         120
+  C:0DA2H         LINE#         121
+  C:0DA5H         LINE#         122
+  C:0DA5H         LINE#         124
+  C:0DA5H         LINE#         125
+  C:0DD8H         LINE#         126
+  C:0DD8H         LINE#         127
+  C:0DF7H         LINE#         128
+  C:0DF9H         LINE#         129
+  C:0E1AH         LINE#         130
+  C:0E4DH         LINE#         131
+  C:0E50H         LINE#         132
+  C:0E88H         LINE#         133
+  C:0EB1H         LINE#         134
+  C:0EC3H         LINE#         135
+  C:0EC3H         LINE#         136
+  C:0EC6H         LINE#         137
+  C:0EC6H         LINE#         138
+  C:0EC8H         LINE#         139
+  -------         ENDPROC       _LISTAPPEND
+  -------         PROC          _LISTDELETE
+  X:0436H         SYMBOL        now_list
+  X:0439H         SYMBOL        now_data
+  -------         DO            
+  X:043CH         SYMBOL        ptr
+  X:043FH         SYMBOL        qtr
+  -------         ENDDO         
+  C:0EC9H         LINE#         149
+  C:0ED4H         LINE#         150
+  C:0ED4H         LINE#         153
+  C:0F1CH         LINE#         154
+  C:0F1CH         LINE#         155
+  C:0F3BH         LINE#         157
+  C:0F71H         LINE#         158
+  C:0F71H         LINE#         159
+  C:0FA4H         LINE#         160
+  C:0FA4H         LINE#         161
+  C:0FD2H         LINE#         162
+  C:0FE0H         LINE#         163
+  C:0FF3H         LINE#         164
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/03/2021  20:39:15  PAGE 9
+
+
+  C:1008H         LINE#         165
+  C:1008H         LINE#         166
+  C:100AH         LINE#         168
+  C:1011H         LINE#         169
+  C:1047H         LINE#         170
+  C:1047H         LINE#         171
+  C:105DH         LINE#         172
+  C:107CH         LINE#         173
+  C:10B2H         LINE#         174
+  C:10B2H         LINE#         175
+  C:10E0H         LINE#         176
+  C:10EEH         LINE#         177
+  C:1101H         LINE#         178
+  C:1116H         LINE#         179
+  C:1116H         LINE#         180
+  C:1119H         LINE#         181
+  C:1119H         LINE#         182
+  C:111FH         LINE#         183
+  -------         ENDPROC       _LISTDELETE
+  -------         PROC          _COMPARELISTTYPE
+  X:048AH         SYMBOL        first_data
+  X:048DH         SYMBOL        second_data
+  C:206BH         LINE#         194
+  C:2076H         LINE#         195
+  C:2076H         LINE#         196
+  C:20A4H         LINE#         197
+  C:20A7H         LINE#         199
+  C:20A9H         LINE#         200
+  -------         ENDPROC       _COMPARELISTTYPE
+  -------         PROC          _LISTFIRSTNODE
+  X:04A0H         SYMBOL        now_list
+  C:20AAH         LINE#         210
+  C:20B5H         LINE#         211
+  C:20B5H         LINE#         212
+  C:20CAH         LINE#         213
+  C:20D1H         LINE#         215
+  C:20E5H         LINE#         216
+  -------         ENDPROC       _LISTFIRSTNODE
+  -------         PROC          _NODEFIRSTTOLAST
+  X:0442H         SYMBOL        now_list
+  -------         DO            
+  X:0445H         SYMBOL        temp_node
+  X:0448H         SYMBOL        p
+  X:044BH         SYMBOL        q
+  -------         ENDDO         
+  C:17EFH         LINE#         227
+  C:17FAH         LINE#         228
+  C:17FAH         LINE#         231
+  C:1817H         LINE#         232
+  C:1817H         LINE#         233
+  C:1830H         LINE#         234
+  C:1867H         LINE#         235
+  C:1886H         LINE#         236
+  C:189CH         LINE#         237
+  C:18C6H         LINE#         238
+  C:18C6H         LINE#         239
+  C:18DCH         LINE#         240
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/03/2021  20:39:15  PAGE 10
+
+
+  C:18FBH         LINE#         241
+  C:18FDH         LINE#         242
+  C:191DH         LINE#         243
+  C:1942H         LINE#         244
+  C:1942H         LINE#         245
+  -------         ENDPROC       _NODEFIRSTTOLAST
+  -------         ENDMOD        SMALL_RTOS_LIST
+
+  -------         MODULE        SMALL_RTOS_HARDWARE
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00C0H         PUBLIC        P4
+  D:00C8H         PUBLIC        P5
+  B:00A8H.7       PUBLIC        EA
+  D:00E8H         PUBLIC        P6
+  D:00F8H         PUBLIC        P7
+  D:00A8H         PUBLIC        IE
+  B:00A8H.4       PUBLIC        ES
+  D:00B8H         PUBLIC        IP
+  B:0098H.1       PUBLIC        TI
+  D:00D8H         PUBLIC        CCON
+  D:0099H         PUBLIC        SBUF
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  D:008EH         PUBLIC        AUXR
+  B:00A8H.1       PUBLIC        ET0
+  C:21C2H         PUBLIC        HardwareInit
+  B:0088H.5       PUBLIC        TF0
+  B:00A8H.3       PUBLIC        ET1
+  C:20E6H         PUBLIC        _Timer0Init
+  D:008CH         PUBLIC        TH0
+  D:008DH         PUBLIC        TH1
+  D:008AH         PUBLIC        TL0
+  D:008BH         PUBLIC        TL1
+  B:0088H.4       PUBLIC        TR0
+  B:0088H.6       PUBLIC        TR1
+  C:2184H         PUBLIC        Uart1Init
+  D:00D0H         PUBLIC        PSW
+  C:2169H         PUBLIC        _putchar
+  -------         PROC          HARDWAREINIT
+  C:21C2H         LINE#         19
+  C:21C2H         LINE#         20
+  C:21C2H         LINE#         22
+  C:21C5H         LINE#         24
+  C:21D0H         LINE#         25
+  -------         ENDPROC       HARDWAREINIT
+  -------         PROC          UART1INIT
+  C:2184H         LINE#         34
+  C:2184H         LINE#         35
+  C:2184H         LINE#         36
+  C:2187H         LINE#         37
+  C:218AH         LINE#         38
+  C:218DH         LINE#         39
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/03/2021  20:39:15  PAGE 11
+
+
+  C:2190H         LINE#         40
+  C:2193H         LINE#         41
+  C:2196H         LINE#         42
+  C:2198H         LINE#         43
+  C:219AH         LINE#         44
+  -------         ENDPROC       UART1INIT
+  -------         PROC          _PUTCHAR
+  X:04AAH         SYMBOL        dat
+  C:2169H         LINE#         54
+  C:216EH         LINE#         55
+  C:216EH         LINE#         56
+  C:2170H         LINE#         57
+  C:2177H         LINE#         58
+  C:217AH         LINE#         59
+  C:217CH         LINE#         60
+  C:217EH         LINE#         61
+  C:2183H         LINE#         62
+  -------         ENDPROC       _PUTCHAR
+  -------         PROC          _TIMER0INIT
+  X:0496H         SYMBOL        tim
+  C:20E6H         LINE#         72
+  C:20ECH         LINE#         73
+  C:20ECH         LINE#         75
+  C:20EFH         LINE#         76
+  C:20F2H         LINE#         77
+  C:2102H         LINE#         78
+  C:2117H         LINE#         79
+  C:2119H         LINE#         80
+  C:211BH         LINE#         81
+  C:211DH         LINE#         82
+  C:211FH         LINE#         83
+  -------         ENDPROC       _TIMER0INIT
+  -------         ENDMOD        SMALL_RTOS_HARDWARE
+
+  -------         MODULE        SMALL_RTOS_CORE
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00C0H         PUBLIC        P4
+  D:00C8H         PUBLIC        P5
+  D:00E8H         PUBLIC        P6
+  D:00F8H         PUBLIC        P7
+  C:1120H         PUBLIC        TaskSwitch
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  X:0491H         PUBLIC        ready_queue
+  D:0081H         PUBLIC        SP
+  D:00D8H         PUBLIC        CCON
+  C:1FAFH         PUBLIC        main
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  C:21DFH         PUBLIC        TaskNum
+  C:21B2H         PUBLIC        SmallOsInit
+  X:0494H         PUBLIC        pid_pool
+  C:1C97H         PUBLIC        GetPoolPid
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/03/2021  20:39:15  PAGE 12
+
+
+  X:0495H         PUBLIC        task_num
+  C:21E5H         PUBLIC        small_rtos_system_task
+  C:1E69H         PUBLIC        _TaskCreate
+  D:00D0H         PUBLIC        PSW
+  I:0022H         PUBLIC        process_stack
+  -------         PROC          SMALLOSINIT
+  C:21B2H         LINE#         31
+  C:21B2H         LINE#         32
+  C:21B2H         LINE#         34
+  C:21B5H         LINE#         36
+  C:21B8H         LINE#         38
+  C:21C1H         LINE#         43
+  -------         ENDPROC       SMALLOSINIT
+  -------         PROC          MAIN
+  C:1FAFH         LINE#         53
+  C:1FAFH         LINE#         54
+  C:1FAFH         LINE#         56
+  C:1FB2H         LINE#         58
+  C:1FBDH         LINE#         59
+  C:1FD6H         LINE#         60
+  C:1FFCH         LINE#         61
+  C:201CH         LINE#         62
+  -------         ENDPROC       MAIN
+  -------         PROC          GETPOOLPID
+  -------         DO            
+  X:04A3H         SYMBOL        i
+  X:04A4H         SYMBOL        j
+  X:04A5H         SYMBOL        size
+  -------         ENDDO         
+  C:1C97H         LINE#         71
+  C:1C97H         LINE#         72
+  C:1C97H         LINE#         73
+  C:1C9CH         LINE#         74
+  C:1CA1H         LINE#         75
+  C:1CA6H         LINE#         76
+  C:1CC0H         LINE#         77
+  C:1CC0H         LINE#         78
+  C:1CD5H         LINE#         79
+  C:1CECH         LINE#         81
+  C:1CF2H         LINE#         82
+  C:1D06H         LINE#         83
+  C:1D06H         LINE#         84
+  C:1D2DH         LINE#         85
+  C:1D2DH         LINE#         86
+  C:1D63H         LINE#         87
+  C:1D77H         LINE#         88
+  C:1D77H         LINE#         89
+  C:1D80H         LINE#         90
+  C:1D89H         LINE#         91
+  C:1D8BH         LINE#         92
+  -------         ENDPROC       GETPOOLPID
+  -------         PROC          _TASKCREATE
+  X:0412H         SYMBOL        task_name
+  X:0415H         SYMBOL        task_priority
+  -------         DO            
+  X:0416H         SYMBOL        temp_pcb
+  -------         ENDDO         
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/03/2021  20:39:15  PAGE 13
+
+
+  C:1E69H         LINE#         102
+  C:1E79H         LINE#         103
+  C:1E79H         LINE#         105
+  C:1E81H         LINE#         106
+  C:1E90H         LINE#         107
+  C:1E93H         LINE#         108
+  C:1EA9H         LINE#         109
+  C:1EB3H         LINE#         110
+  C:1EC9H         LINE#         111
+  C:1EE5H         LINE#         112
+  C:1EF2H         LINE#         113
+  C:1EF8H         LINE#         114
+  C:1EFEH         LINE#         115
+  C:1F29H         LINE#         116
+  C:1F2EH         LINE#         117
+  -------         ENDPROC       _TASKCREATE
+  -------         PROC          TASKNUM
+  C:21DFH         LINE#         127
+  C:21DFH         LINE#         128
+  C:21DFH         LINE#         129
+  C:21E4H         LINE#         130
+  -------         ENDPROC       TASKNUM
+  -------         PROC          SMALL_RTOS_SYSTEM_TASK
+  C:21E5H         LINE#         140
+  C:21E5H         LINE#         141
+  C:21E5H         LINE#         142
+  C:21E8H         LINE#         143
+  -------         ENDPROC       SMALL_RTOS_SYSTEM_TASK
+  -------         PROC          TASKSWITCH
+  -------         DO            
+  X:0490H         SYMBOL        count
+  -------         DO            
+  X:0482H         SYMBOL        i
+  X:0483H         SYMBOL        h_addr
+  X:0484H         SYMBOL        l_addr
+  X:0485H         SYMBOL        temp_sp
+  X:0487H         SYMBOL        temp_node
+  -------         ENDDO         
+  -------         ENDDO         
+  C:1120H         LINE#         154
+  C:1120H         LINE#         155
+  C:1120H         LINE#         157
+  C:1126H         LINE#         158
+  C:113BH         LINE#         159
+  C:113BH         LINE#         160
+  C:1158H         LINE#         161
+  C:1158H         LINE#         162
+  C:115DH         LINE#         164
+  C:1169H         LINE#         166
+  C:1188H         LINE#         167
+  C:11AEH         LINE#         168
+  C:11C7H         LINE#         169
+  C:11E1H         LINE#         170
+  C:11F8H         LINE#         171
+  C:11F8H         LINE#         172
+  C:1229H         LINE#         173
+  C:1231H         LINE#         174
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/03/2021  20:39:15  PAGE 14
+
+
+  C:1241H         LINE#         176
+  C:124FH         LINE#         177
+  C:1268H         LINE#         178
+  C:127FH         LINE#         179
+  C:127FH         LINE#         180
+  C:12AEH         LINE#         181
+  C:12B6H         LINE#         182
+  C:12D0H         LINE#         183
+  C:1307H         LINE#         184
+  C:133EH         LINE#         185
+  C:134EH         LINE#         186
+  C:134EH         LINE#         187
+  C:1353H         LINE#         188
+  C:1353H         LINE#         189
+  -------         ENDPROC       TASKSWITCH
+  -------         ENDMOD        SMALL_RTOS_CORE
+
+  -------         MODULE        SMALL_RTOS
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  C:00C9H         SYMBOL        INITSP
+  D:00D0H         SYMBOL        PSW
+  D:0081H         SYMBOL        SP
+  C:00D0H         SYMBOL        TIMER0INTERRUPT
+  C:0000H         LINE#         8
+  C:000BH         LINE#         10
+  C:00C9H         LINE#         13
+  C:00CCH         LINE#         14
+  C:00CFH         LINE#         15
+  C:00D0H         LINE#         18
+  C:00D2H         LINE#         19
+  C:00D4H         LINE#         20
+  C:00D6H         LINE#         21
+  C:00D8H         LINE#         22
+  C:00DAH         LINE#         23
+  C:00DCH         LINE#         24
+  C:00DEH         LINE#         25
+  C:00E0H         LINE#         26
+  C:00E2H         LINE#         27
+  C:00E4H         LINE#         28
+  C:00E6H         LINE#         29
+  C:00E8H         LINE#         30
+  C:00EAH         LINE#         31
+  C:00EDH         LINE#         32
+  C:00EFH         LINE#         33
+  C:00F1H         LINE#         34
+  C:00F3H         LINE#         35
+  C:00F5H         LINE#         36
+  C:00F7H         LINE#         37
+  C:00F9H         LINE#         38
+  C:00FBH         LINE#         39
+  C:00FDH         LINE#         40
+  C:00FFH         LINE#         41
+  C:0101H         LINE#         42
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/03/2021  20:39:15  PAGE 15
+
+
+  C:0103H         LINE#         43
+  C:0105H         LINE#         44
+  C:0107H         LINE#         45
+  -------         ENDMOD        SMALL_RTOS
+
+  -------         MODULE        SMALL_RTOS_MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:219BH         PUBLIC        small_rtos_main
+  C:2145H         PUBLIC        task1
+  C:2120H         PUBLIC        task2
+  -------         PROC          TASK1
+  -------         DO            
+  X:04A6H         SYMBOL        a
+  -------         ENDDO         
+  C:2145H         LINE#         10
+  C:2145H         LINE#         11
+  C:2145H         LINE#         12
+  C:214DH         LINE#         13
+  C:214DH         LINE#         14
+  C:214DH         LINE#         15
+  C:2166H         LINE#         16
+  -------         ENDPROC       TASK1
+  -------         PROC          TASK2
+  -------         DO            
+  X:04A8H         SYMBOL        b
+  -------         ENDDO         
+  C:2120H         LINE#         18
+  C:2120H         LINE#         19
+  C:2120H         LINE#         20
+  C:2129H         LINE#         21
+  C:2129H         LINE#         22
+  C:2129H         LINE#         23
+  C:2142H         LINE#         24
+  -------         ENDPROC       TASK2
+  -------         PROC          SMALL_RTOS_MAIN
+  C:219BH         LINE#         26
+  C:219BH         LINE#         27
+  C:219BH         LINE#         28
+  C:21A6H         LINE#         29
+  C:21B1H         LINE#         30
+  -------         ENDPROC       SMALL_RTOS_MAIN
+  -------         ENDMOD        SMALL_RTOS_MAIN
+
+  -------         MODULE        ?C?COPY
+  C:05F7H         PUBLIC        ?C?COPY
+  -------         ENDMOD        ?C?COPY
+
+  -------         MODULE        ?C?CLDPTR
+  C:061DH         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?CLDOPTR
+  C:0636H         PUBLIC        ?C?CLDOPTR
+  -------         ENDMOD        ?C?CLDOPTR
+
+  -------         MODULE        ?C?CSTPTR
+  C:0663H         PUBLIC        ?C?CSTPTR
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/03/2021  20:39:15  PAGE 16
+
+
+  -------         ENDMOD        ?C?CSTPTR
+
+  -------         MODULE        ?C?CSTOPTR
+  C:0675H         PUBLIC        ?C?CSTOPTR
+  -------         ENDMOD        ?C?CSTOPTR
+
+  -------         MODULE        ?C?IILDX
+  C:0697H         PUBLIC        ?C?IILDX
+  -------         ENDMOD        ?C?IILDX
+
+  -------         MODULE        ?C?ILDPTR
+  C:06ADH         PUBLIC        ?C?ILDPTR
+  -------         ENDMOD        ?C?ILDPTR
+
+  -------         MODULE        ?C?IILDPTR
+  C:06D8H         PUBLIC        ?C?IILDPTR
+  -------         ENDMOD        ?C?IILDPTR
+
+  -------         MODULE        ?C?ISTPTR
+  C:0710H         PUBLIC        ?C?ISTPTR
+  -------         ENDMOD        ?C?ISTPTR
+
+  -------         MODULE        ?C?ULSHR
+  C:072FH         PUBLIC        ?C?ULSHR
+  -------         ENDMOD        ?C?ULSHR
+
+  -------         MODULE        ?C?LSTXDATA
+  C:0742H         PUBLIC        ?C?LSTXDATA
+  -------         ENDMOD        ?C?LSTXDATA
+
+  -------         MODULE        ?C?PLDPTR
+  C:074EH         PUBLIC        ?C?PLDPTR
+  -------         ENDMOD        ?C?PLDPTR
+
+  -------         MODULE        ?C?PSTPTR
+  C:076EH         PUBLIC        ?C?PSTPTR
+  -------         ENDMOD        ?C?PSTPTR
+
+  -------         MODULE        ?C?PLDOPTR
+  C:07BDH         PUBLIC        ?C?PLDOPTR
+  -------         ENDMOD        ?C?PLDOPTR
+
+  -------         MODULE        ?C?PSTOPTR
+  C:07EDH         PUBLIC        ?C?PSTOPTR
+  -------         ENDMOD        ?C?PSTOPTR
+
+  -------         MODULE        ?C?ICALL
+  C:0846H         PUBLIC        ?C?ICALL
+  C:084AH         PUBLIC        ?C?ICALL2
+  -------         ENDMOD        ?C?ICALL
+
+  -------         MODULE        PRINTF
+  X:03EAH         PUBLIC        ?_PRINTF517?BYTE
+  X:03EAH         PUBLIC        ?_PRINTF?BYTE
+  X:03EAH         PUBLIC        ?_SPRINTF517?BYTE
+  X:03EAH         PUBLIC        ?_SPRINTF?BYTE
+  C:0936H         PUBLIC        _PRINTF
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/03/2021  20:39:15  PAGE 17
+
+
+  C:0936H         PUBLIC        _PRINTF517
+  C:0930H         PUBLIC        _SPRINTF
+  C:0930H         PUBLIC        _SPRINTF517
+  -------         ENDMOD        PRINTF
+
+  -------         MODULE        ?C?PLDIDATA
+  C:084CH         PUBLIC        ?C?PLDIDATA
+  -------         ENDMOD        ?C?PLDIDATA
+
+  -------         MODULE        ?C?PSTIDATA
+  C:0855H         PUBLIC        ?C?PSTIDATA
+  -------         ENDMOD        ?C?PSTIDATA
+
+  -------         MODULE        ?C?PLDXDATA
+  C:085EH         PUBLIC        ?C?PLDXDATA
+  -------         ENDMOD        ?C?PLDXDATA
+
+  -------         MODULE        ?C?PLDIXDATA
+  C:0867H         PUBLIC        ?C?PLDIXDATA
+  -------         ENDMOD        ?C?PLDIXDATA
+
+  -------         MODULE        ?C?PSTXDATA
+  C:087EH         PUBLIC        ?C?PSTXDATA
+  -------         ENDMOD        ?C?PSTXDATA
+
+  -------         MODULE        ?C?PLDPDATA
+  C:0887H         PUBLIC        ?C?PLDPDATA
+  -------         ENDMOD        ?C?PLDPDATA
+
+  -------         MODULE        ?C?PSTPDATA
+  C:0890H         PUBLIC        ?C?PSTPDATA
+  -------         ENDMOD        ?C?PSTPDATA
+
+  -------         MODULE        ?C?PLDCODE
+  C:0899H         PUBLIC        ?C?PLDCODE
+  -------         ENDMOD        ?C?PLDCODE
+
+  -------         MODULE        ?C?CCASE
+  C:08A5H         PUBLIC        ?C?CCASE
+  -------         ENDMOD        ?C?CCASE
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DESTROYLIST?SMALL_RTOS_LIST
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CLEARLIST?SMALL_RTOS_LIST
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_LISTDELETE?SMALL_RTOS_LIST
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?TASKNUM?SMALL_RTOS_CORE
+
+Program Size: data=39.1 xdata=1195 code=8683
+LINK/LOCATE RUN COMPLETE.  4 WARNING(S),  0 ERROR(S)

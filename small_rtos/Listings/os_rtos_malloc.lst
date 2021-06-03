@@ -1,0 +1,182 @@
+C51 COMPILER V9.60.0.0   OS_RTOS_MALLOC                                                    06/03/2021 20:39:14 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE OS_RTOS_MALLOC
+OBJECT MODULE PLACED IN .\Objects\os_rtos_malloc.obj
+COMPILER INVOKED BY: D:\keil\C51\BIN\C51.EXE os\os_rtos_malloc.c LARGE OPTIMIZE(0,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT
+                    -(.\Listings\os_rtos_malloc.lst) TABS(2) OBJECT(.\Objects\os_rtos_malloc.obj)
+
+line level    source
+
+   1          /*
+   2           * @FileName: os_rtos_malloc.c
+   3           * @Author: chen jixuan
+   4           * @Date: 2021-05-02 14:59:45
+   5           * @Version: v1.0
+   6           * @Description: .c文件
+   7           */
+   8          
+   9          #include "os_rtos_malloc.h"
+  10          
+  11          //开辟的内存大小
+  12          xdata int8 os_memory[OS_MEMORY_SIZE] = {0};
+  13          //空内表
+  14          os_block xdata *free_list = NULL;
+  15          
+  16          /**
+  17           * @Name: InitMemory
+  18           * @Description: 对内存链表进行初始化
+  19           * @Date: 2021-05-02 17:17:17
+  20           * @Author: chen jixuan
+  21           * @Param: none
+  22           * @Return: none
+  23           */
+  24          void InitMemory()
+  25          {
+  26   1          free_list = (void *)os_memory;
+  27   1          free_list->size_ = OS_MEMORY_SIZE - sizeof(os_block);
+  28   1          free_list->is_free_ = TRUE;
+  29   1          free_list->next_ = NULL;
+  30   1      }
+  31          
+  32          /**
+  33           * @Name: OsMalloc
+  34           * @Description: 申请内存
+  35           * @Date: 2021-05-02 17:23:10
+  36           * @Author: chen jixuan
+  37           * @param {int} malloc_size
+  38           * @Return: 申请到的地址;申请失败返回NULL
+  39           */
+  40          void *OsMalloc(uint16 malloc_size)
+  41          {
+  42   1          os_block *curr;
+  43   1          void *result_addr;
+  44   1          //如果没有初始化则调用初始化函数
+  45   1          if ((uint16)free_list == NULL)
+  46   1              InitMemory();
+  47   1          curr = free_list;
+  48   1          while ((curr->size_ < malloc_size) || (curr->is_free_ == FALSE))
+  49   1          {
+  50   2              if (curr->next_ != NULL)
+  51   2              {
+  52   3                  curr = curr->next_;
+  53   3              }
+  54   2              else
+C51 COMPILER V9.60.0.0   OS_RTOS_MALLOC                                                    06/03/2021 20:39:14 PAGE 2   
+
+  55   2              {
+  56   3                  return NULL;
+  57   3              }
+  58   2          }
+  59   1          if (curr->size_ < (malloc_size + sizeof(os_block)))
+  60   1          {
+  61   2              curr->is_free_ = FALSE;
+  62   2              result_addr = (void *)(++curr);
+  63   2              return result_addr;
+  64   2          }
+  65   1          else if (curr->size_ >= (malloc_size + sizeof(os_block)))
+  66   1          {
+  67   2              SplitMemory(curr, malloc_size);
+  68   2              result_addr = (void *)(++curr);
+  69   2              return result_addr;
+  70   2          }
+  71   1          return NULL;
+  72   1      }
+  73          
+  74          /**
+  75           * @Name: SplitMalloc
+  76           * @Description: 分割内存
+  77           * @Date: 2021-05-02 18:12:21
+  78           * @Author: chen jixuan
+  79           * @Param: {os_block} *now_addr
+  80           * @param {int} size
+  81           * @Return: none
+  82           */
+  83          void SplitMemory(os_block *now_addr, uint16 size)
+  84          {
+  85   1          //这里一定要加xdata,不然会指向RAM而不是外部的xdata定义的数组
+  86   1          os_block *new_data = (os_block xdata *)((unsigned int)now_addr + size + sizeof(os_block));
+  87   1          new_data->size_ = now_addr->size_ - size - sizeof(os_block);
+  88   1          new_data->is_free_ = TRUE;
+  89   1          new_data->next_ = now_addr->next_;
+  90   1          now_addr->size_ = size;
+  91   1          now_addr->is_free_ = FALSE;
+  92   1          now_addr->next_ = new_data;
+  93   1      }
+  94          
+  95          /**
+  96           * @Name: osFree
+  97           * @Description: 释放内存
+  98           * @Date: 2021-05-02 19:41:39
+  99           * @Author: chen jixuan
+ 100           * @param {os_block} *now_addr
+ 101           * @Return: none
+ 102           */
+ 103          void OsFree(void *now_addr)
+ 104          {
+ 105   1          os_block *curr;
+ 106   1          if (((void *)os_memory < now_addr) && (now_addr <= (void *)((unsigned int)os_memory + OS_MEMORY_SIZE))
+             -)
+ 107   1          {
+ 108   2              os_block *now_ptr = now_addr;
+ 109   2              --now_ptr;
+ 110   2              for (curr = free_list; curr != NULL;)
+ 111   2              {
+ 112   3                  if ((curr == now_ptr) && curr->is_free_ == FALSE)
+ 113   3                  {
+ 114   4                      now_ptr->is_free_ = TRUE;
+ 115   4                      MergeMemory();
+C51 COMPILER V9.60.0.0   OS_RTOS_MALLOC                                                    06/03/2021 20:39:14 PAGE 3   
+
+ 116   4                      break;
+ 117   4                  }
+ 118   3                  else if (curr->next_ != NULL)
+ 119   3                  {
+ 120   4                      curr = curr->next_;
+ 121   4                  }
+ 122   3                  else
+ 123   3                  {
+ 124   4                      break;
+ 125   4                  }
+ 126   3              }
+ 127   2          }
+ 128   1      }
+ 129          
+ 130          /**
+ 131           * @Name: MergeMemory()
+ 132           * @Description: 对内存进行合并
+ 133           * @Date: 2021-05-03 17:35:10
+ 134           * @Author: chen jixuan
+ 135           * @Param: none
+ 136           * @Return: none
+ 137           */
+ 138          void MergeMemory()
+ 139          {
+ 140   1          os_block *curr = free_list;
+ 141   1          while (curr->next_ != NULL)
+ 142   1          {
+ 143   2              if (curr->is_free_ && curr->next_->is_free_)
+ 144   2              {
+ 145   3                  curr->size_ = curr->size_ + curr->next_->size_ + sizeof(os_block);
+ 146   3                  curr->next_ = curr->next_->next_;
+ 147   3              }
+ 148   2              if (curr->next_ != NULL)
+ 149   2                  curr = curr->next_;
+ 150   2              else
+ 151   2                  break;
+ 152   2          }
+ 153   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1539    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   1030    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

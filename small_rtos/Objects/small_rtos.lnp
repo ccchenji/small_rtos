@@ -1,0 +1,9 @@
+".\Objects\os_rtos_malloc.obj",
+".\Objects\small_rtos_list.obj",
+".\Objects\small_rtos_hardware.obj",
+".\Objects\small_rtos_core.obj",
+".\Objects\small_rtos.obj",
+".\Objects\small_rtos_main.obj" 
+TO ".\Objects\small_rtos" 
+PRINT(".\Listings\small_rtos.m51") RAMSIZE(256) 
+XDATA( 0X0000-0X06FF )

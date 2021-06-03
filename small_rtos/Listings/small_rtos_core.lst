@@ -1,0 +1,219 @@
+C51 COMPILER V9.60.0.0   SMALL_RTOS_CORE                                                   06/03/2021 20:39:14 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE SMALL_RTOS_CORE
+OBJECT MODULE PLACED IN .\Objects\small_rtos_core.obj
+COMPILER INVOKED BY: D:\keil\C51\BIN\C51.EXE os\small_rtos_core.c LARGE OPTIMIZE(0,SPEED) BROWSE DEBUG OBJECTEXTEND PRIN
+                    -T(.\Listings\small_rtos_core.lst) TABS(2) OBJECT(.\Objects\small_rtos_core.obj)
+
+line level    source
+
+   1          /*
+   2           * @FileName: small_rtos_core.h
+   3           * @Author: chen jixuan
+   4           * @Date: 2021-05-04 12:35:20
+   5           * @Version: v1.0 
+   6           * @Description: 内核.c文件
+   7           */
+   8          #include "small_rtos_core.h"
+   9          #include "stdio.h"
+  10          
+  11          //就绪队列
+  12          xdata POsList ready_queue=NULL; 
+  13          //阻塞队列
+  14          //xdata POsList block_queue=NULL; 
+  15          //挂起队列
+  16          //xdata POsList hangup_queue=NULL; 
+  17          //进程堆栈
+  18          idata uint8 process_stack[PROCESS_STACK_MAX]={0};
+  19          //记录当前任务数量
+  20          uint8 task_num=0;
+  21          //任务pid
+  22          uint8 pid_pool[PID_POOL_SIZE]={0};
+  23          /**
+  24           * @Name: SmallOsInit()
+  25           * @Description: 系统初始化, 必须先初始化
+  26           * @Date: 2021-05-04 16:57:28
+  27           * @Author: chen jixuan
+  28           * @Param: none
+  29           * @Return: none
+  30           */
+  31          void SmallOsInit()
+  32          {
+  33   1        //硬件初始化
+  34   1        HardwareInit();
+  35   1        //初始化内存
+  36   1        InitMemory();
+  37   1        //就绪队列初始化
+  38   1        InitList(&ready_queue);
+  39   1        ////阻塞队列初始化
+  40   1        //InitList(&block_queue);
+  41   1        ////挂起队列初始化
+  42   1        //InitList(&hangup_queue);
+  43   1      }
+  44          
+  45          /**
+  46           * @Name: main()
+  47           * @Description: small_rtos运行主函数
+  48           * @Date: 2021-05-06 15:02:29
+  49           * @Author: chen jixuan
+  50           * @Param: none
+  51           * @Return: none
+  52           */
+  53          void main()
+  54          {
+C51 COMPILER V9.60.0.0   SMALL_RTOS_CORE                                                   06/03/2021 20:39:14 PAGE 2   
+
+  55   1        //必须先初始化
+  56   1        SmallOsInit();
+  57   1        //创建系统任务
+  58   1        TaskCreate(small_rtos_system_task,3);
+  59   1        ready_queue->next_->data_.process_state_=running;
+  60   1        ready_queue->next_->data_.sp_=(uint8)(process_stack);
+  61   1        ready_queue->next_->data_.process_function_();
+  62   1      }
+  63          /**
+  64           * @Name: GetTaskPid
+  65           * @Description: 从编号池获得任务pid
+  66           * @Date: 2021-05-06 15:39:15
+  67           * @Author: chen jixuan
+  68           * @Param: none
+  69           * @Return: 成功返回pid序号,失败返回-1
+  70           */
+  71          int8 GetPoolPid()
+  72          {
+  73   1        uint8 i=0;
+  74   1          uint8 j=0;
+  75   1          uint8 size=0;
+  76   1        for(i=0;i<PID_POOL_SIZE;i++)
+  77   1        {
+  78   2              if((i+1)==PID_POOL_SIZE)
+  79   2                  size=Task_MAX_NUM-i*POOL_BLOCK_SIZE;
+  80   2              else
+  81   2                  size=POOL_BLOCK_SIZE;
+  82   2              for(j=0;j<size;j++)
+  83   2              {
+  84   3                  if(((pid_pool[i]>>j)&0x01)==0)
+  85   3                  {
+  86   4                      pid_pool[i]=pid_pool[i]|(0x01<<j);
+  87   4                      return j+i*POOL_BLOCK_SIZE;
+  88   4                  }
+  89   3              }
+  90   2        }
+  91   1        return -1;
+  92   1      }
+  93          /**
+  94           * @Name: TaskCreate
+  95           * @Description: 
+  96           * @Date: 2021-05-06 15:20:01
+  97           * @Author: chen jixuan
+  98           * @param {void(*task_name)(void)} 
+  99           * @param {uint8} task_priority
+ 100           * @Return: 成功返回进程pid,失败返回-1
+ 101           */
+ 102          int8 TaskCreate(void(*task_name)(void),uint8 task_priority)
+ 103          {
+ 104   1        xdata ListType temp_pcb;
+ 105   1        temp_pcb.process_pid_=GetPoolPid();
+ 106   1        if(temp_pcb.process_pid_==-1)
+ 107   1          return -1;
+ 108   1        temp_pcb.process_function_=task_name;
+ 109   1        temp_pcb.process_priority_=task_priority;
+ 110   1        temp_pcb.process_stack_[0]=((uint16)task_name)&0x00ff;
+ 111   1        temp_pcb.process_stack_[1]=(((uint16)task_name)>>8)&0x00ff;
+ 112   1        temp_pcb.sp_=(uint8)(process_stack+14);
+ 113   1        temp_pcb.process_state_=ready;
+ 114   1        task_num++;
+ 115   1        ListAppend(ready_queue,&temp_pcb);
+ 116   1        return temp_pcb.process_pid_;
+C51 COMPILER V9.60.0.0   SMALL_RTOS_CORE                                                   06/03/2021 20:39:14 PAGE 3   
+
+ 117   1      }
+ 118          
+ 119          /**
+ 120           * @Name: TaskNum
+ 121           * @Description: 返回当前任务总数
+ 122           * @Date: 2021-05-06 15:29:58
+ 123           * @Author: chen jixuan
+ 124           * @Param: none
+ 125           * @Return: 返回当前任务总数
+ 126           */
+ 127          uint8 TaskNum()
+ 128          {
+ 129   1        return task_num;
+ 130   1      }
+ 131          
+ 132          /**
+ 133           * @Name: small_rtos_task0
+ 134           * @Description: 系统第一个任务 
+ 135           * @Date: 2021-05-06 20:02:36
+ 136           * @Author: chen jixuan
+ 137           * @Param: none
+ 138           * @Return: none
+ 139           */
+ 140          void small_rtos_system_task()
+ 141          {
+ 142   1        small_rtos_main();
+ 143   1        while(1);
+ 144   1      }
+ 145          
+ 146          /**
+ 147           * @Name: TimeroTaskSwitch
+ 148           * @Description: 定时器0中断用于任务切换
+ 149           * @Date: 2021-05-07 11:06:42
+ 150           * @Author: chen jixuan
+ 151           * @Param: none
+ 152           * @Return: none
+ 153           */
+ 154          void TaskSwitch() 
+ 155          {
+ 156   1        static uint8 count=0;
+ 157   1        count++;
+ 158   1        if(count>=N_TIME_SLICE)
+ 159   1        {
+ 160   2          if (ready_queue->num_ > 1)
+ 161   2          {
+ 162   3            uint8 i = 0;
+ 163   3            uint8 h_addr, l_addr; //记录当前函数地址
+ 164   3            uint16 temp_sp = SP;  //用于记录当前SP指针值
+ 165   3            PListNode temp_node;
+ 166   3            h_addr = process_stack[temp_sp - (uint8)process_stack];
+ 167   3            l_addr = process_stack[temp_sp - (uint8)process_stack - 1];
+ 168   3            temp_node = ListFirstNode(ready_queue);
+ 169   3            temp_node->data_.sp_ = SP - 2; //调用函数多压了一个地址,所以将SP指针减2
+ 170   3            for (i = 0; i < PROCESS_STACK_MAX; i++)
+ 171   3            {
+ 172   4              temp_node->data_.process_stack_[i] = process_stack[i];
+ 173   4            }
+ 174   3            temp_node->data_.process_state_ = ready;
+ 175   3            //任务切换
+ 176   3            NodeFirstToLast(ready_queue);
+ 177   3            temp_node = ListFirstNode(ready_queue);
+ 178   3            for (i = 0; i < PROCESS_STACK_MAX; i++)
+C51 COMPILER V9.60.0.0   SMALL_RTOS_CORE                                                   06/03/2021 20:39:14 PAGE 4   
+
+ 179   3            {
+ 180   4              process_stack[i] = temp_node->data_.process_stack_[i];
+ 181   4            }
+ 182   3            SP = temp_node->data_.sp_ + 2; //空出两个字节存贮当前函数的返回地址
+ 183   3            process_stack[temp_node->data_.sp_ + 1 - (uint8)process_stack] = l_addr;
+ 184   3            process_stack[temp_node->data_.sp_ + 2 - (uint8)process_stack] = h_addr;
+ 185   3            temp_node->data_.process_state_ = running;
+ 186   3          }
+ 187   2          count=0;
+ 188   2        }
+ 189   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1145    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =     53    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =     25    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,283 @@
+C51 COMPILER V9.60.0.0   SMALL_RTOS_LIST                                                   06/03/2021 20:39:14 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE SMALL_RTOS_LIST
+OBJECT MODULE PLACED IN .\Objects\small_rtos_list.obj
+COMPILER INVOKED BY: D:\keil\C51\BIN\C51.EXE os\small_rtos_list.c LARGE OPTIMIZE(0,SPEED) BROWSE DEBUG OBJECTEXTEND PRIN
+                    -T(.\Listings\small_rtos_list.lst) TABS(2) OBJECT(.\Objects\small_rtos_list.obj)
+
+line level    source
+
+   1          /*
+   2           * @FileName: small_rtos_list.c
+   3           * @Author: chen jixuan
+   4           * @Date: 2021-04-29 20:39:42
+   5           * @Version: 当前版本
+   6           * @Description: 对该文件的描述
+   7           */
+   8          
+   9          #include "small_rtos_list.h"
+  10          
+  11          /**
+  12           * @Name: InitList
+  13           * @Description: 初始化列表,未初始化的列表要求赋值为NULL,不然该函数无法初始化
+  14           * @Date: 2021-04-29 21:20:25
+  15           * @Author: chen jixuan
+  16           * @Return: 初始化成功返回true,失败返回false
+  17           * @param {POsList} *now_list
+  18           */
+  19          bool InitList(POsList *now_list)
+  20          {
+  21   1          if (*now_list==NULL)
+  22   1          {
+  23   2      
+  24   2              (*now_list) = (POsList)OsMalloc(sizeof(OsList));
+  25   2              if((*now_list)==NULL)
+  26   2                  return FALSE;
+  27   2              (*now_list)->next_ = NULL;
+  28   2              (*now_list)->num_ = 0; //当前列表的节点数
+  29   2              (*now_list)->is_init_ = TRUE;
+  30   2              return TRUE;
+  31   2          }
+  32   1          else
+  33   1          {
+  34   2              return FALSE;
+  35   2          }
+  36   1      }
+  37          
+  38          /**
+  39           * @Name: DestroyList
+  40           * @Description: 销毁列表
+  41           * @Date: 2021-04-29 21:21:37
+  42           * @Author: chen jixuan
+  43           * @Return:  成功返回true,失败返回false
+  44           * @param {POsList} *now_list
+  45           */
+  46          bool DestroyList(POsList *now_list)
+  47          {
+  48   1          PListNode node;
+  49   1          PListNode temp;
+  50   1          if((*now_list)!=NULL&&(*now_list)->is_init_==TRUE)
+  51   1          {
+  52   2              node = (*now_list)->next_;
+  53   2              OsFree((*now_list));
+  54   2              (*now_list)=NULL;
+C51 COMPILER V9.60.0.0   SMALL_RTOS_LIST                                                   06/03/2021 20:39:14 PAGE 2   
+
+  55   2              while (node)
+  56   2              {
+  57   3                  temp = node->next_;
+  58   3                  OsFree(node);
+  59   3                  node = temp;
+  60   3              }
+  61   2              return TRUE;
+  62   2          }
+  63   1          else
+  64   1          {
+  65   2              return FALSE;
+  66   2          }
+  67   1      }
+  68          
+  69          /**
+  70           * @Name: ClaerList
+  71           * @Description: 清空列表
+  72           * @Date: 2021-04-29 21:23:30
+  73           * @Author: chen jixuan
+  74           * @Return: 成功返回true,失败返回false 
+  75           * @param {POsList} now_list
+  76           */
+  77          bool ClearList(POsList now_list)
+  78          {
+  79   1          PListNode ptr,qtr;
+  80   1          if(now_list!=NULL&&now_list->is_init_==TRUE)
+  81   1          {
+  82   2              ptr = now_list->next_;
+  83   2              while (ptr!=NULL)
+  84   2              {
+  85   3                  qtr = ptr->next_;
+  86   3                  OsFree(ptr);
+  87   3                  ptr = qtr;
+  88   3              }
+  89   2              now_list->is_init_ = TRUE;
+  90   2              now_list->next_ = NULL;
+  91   2              now_list->num_ = 0;
+  92   2              return TRUE;
+  93   2          }
+  94   1          else
+  95   1              return FALSE;
+  96   1      }
+  97          
+  98          /**
+  99           * @Name: ListAppend
+ 100           * @Description: 向链表后面添加数据
+ 101           * @Date: 2021-04-29 21:25:00
+ 102           * @Author: chen jixuan
+ 103           * @Return: 成功返回true,失败返回false
+ 104           * @param {POsList} now_list
+ 105           * @param {ListType} *dat
+ 106           */
+ 107          bool ListAppend(POsList now_list,ListType *dat)
+ 108          {
+ 109   1          PListNode ptr;
+ 110   1          if(now_list!=NULL&&now_list->is_init_)
+ 111   1          {
+ 112   2              ptr=now_list->next_;
+ 113   2              if(now_list->next_==NULL)
+ 114   2              {
+ 115   3                  now_list->next_=(PListNode)OsMalloc(sizeof(ListNode));
+ 116   3                  if(now_list->next_==NULL)
+C51 COMPILER V9.60.0.0   SMALL_RTOS_LIST                                                   06/03/2021 20:39:14 PAGE 3   
+
+ 117   3                      return FALSE;
+ 118   3                  now_list->next_->data_=*dat;
+ 119   3                  now_list->next_->next_=NULL;
+ 120   3                  now_list->num_=1;
+ 121   3                  return TRUE;
+ 122   3              }
+ 123   2              else
+ 124   2              {
+ 125   3                  while(ptr->next_!=NULL)
+ 126   3                  {
+ 127   4                      ptr=ptr->next_;
+ 128   4                  }
+ 129   3                  ptr->next_=(PListNode)OsMalloc(sizeof(ListNode));
+ 130   3                  if(ptr->next_==NULL)
+ 131   3                      return FALSE;
+ 132   3                  ptr->next_->data_=*dat;
+ 133   3                  ptr->next_->next_=NULL;
+ 134   3                  now_list->num_+=1;
+ 135   3              }
+ 136   2              return TRUE;
+ 137   2          }
+ 138   1          return FALSE;
+ 139   1      }
+ 140          
+ 141          /**
+ 142           * @Name: ListDelete
+ 143           * @Description: 删除列表列的和给定元素相等的元素
+ 144           * @Date: 2021-04-29 21:26:17
+ 145           * @Author: chen jixuan
+ 146           * @Return: 返回删除元素的后一个元素
+ 147           * @param {POsList} now_list
+ 148           */
+ 149          PListNode ListDelete(POsList now_list,ListType* now_data)
+ 150          {
+ 151   1          PListNode ptr;
+ 152   1          PListNode qtr;
+ 153   1          if(now_list!=NULL&&now_list->is_init_)
+ 154   1          {
+ 155   2              ptr=now_list->next_;
+ 156   2              //对第一个节点单独处理
+ 157   2              if(now_list->next_!=NULL)
+ 158   2              {
+ 159   3                  if(CompareListType(&ptr->data_,now_data))
+ 160   3                  {
+ 161   4                      now_list->next_=ptr->next_;
+ 162   4                      OsFree(ptr);
+ 163   4                      now_list->num_-=1;
+ 164   4                      return now_list->next_;
+ 165   4                  }
+ 166   3              }
+ 167   2              else
+ 168   2                  return NULL;
+ 169   2              while(ptr->next_!=NULL)
+ 170   2              {
+ 171   3                  qtr=ptr;
+ 172   3                  ptr=ptr->next_;
+ 173   3                  if(CompareListType(&ptr->data_,now_data))
+ 174   3                  {
+ 175   4                      qtr->next_=ptr->next_;
+ 176   4                      OsFree(ptr);
+ 177   4                      now_list->num_-=1;
+ 178   4                      return qtr->next_;
+C51 COMPILER V9.60.0.0   SMALL_RTOS_LIST                                                   06/03/2021 20:39:14 PAGE 4   
+
+ 179   4                  }
+ 180   3              }
+ 181   2          }
+ 182   1          return NULL;
+ 183   1      }
+ 184          
+ 185          /**
+ 186           * @Name: IntCompare
+ 187           * @Description: 用于对int形数据进行比较
+ 188           * @Date: 2021-04-29 21:27:10
+ 189           * @Author: chen jixuan
+ 190           * @param {ListType} first_data
+ 191           * @param {ListType} second_data
+ 192           * @Return: 相等返回true,失败返回false
+ 193           */
+ 194          bool CompareListType(ListType* first_data,ListType* second_data)
+ 195          {
+ 196   1          if(first_data->process_pid_==second_data->process_pid_)
+ 197   1              return TRUE;
+ 198   1          else
+ 199   1              return FALSE;
+ 200   1      }
+ 201          
+ 202          /**
+ 203           * @Name: ListFirstNode
+ 204           * @Description: 
+ 205           * @Date: 2021-05-07 11:21:01
+ 206           * @Author: chen jixuan
+ 207           * @param {PosList} *now_list
+ 208           * @Return: 链表第一个结点的指针
+ 209           */
+ 210          PListNode ListFirstNode(POsList now_list)
+ 211          {
+ 212   1          if(now_list->num_==0)
+ 213   1              return NULL;
+ 214   1          else
+ 215   1              return now_list->next_;
+ 216   1      }
+ 217          
+ 218          /**
+ 219           * @Name: NodeFirstToLast
+ 220           * @Description: 将链表最后一个数据移到最后一位
+ 221           * @Date: 2021-05-07 11:26:34
+ 222           * @Author: chen jixuan
+ 223           * @Param: 
+ 224           * @Return: 
+ 225           * @param {PRadarList} now_list
+ 226           */
+ 227          void NodeFirstToLast(POsList now_list)
+ 228          {
+ 229   1          PListNode temp_node;
+ 230   1          PListNode p,q;
+ 231   1          if(now_list->num_>=2)
+ 232   1          {
+ 233   2              temp_node=ListFirstNode(now_list);
+ 234   2              now_list->next_=now_list->next_->next_;
+ 235   2              p=now_list->next_;
+ 236   2              q=p;
+ 237   2              while(p!=NULL)
+ 238   2              {
+ 239   3                  q=p;
+ 240   3                  p=p->next_;
+C51 COMPILER V9.60.0.0   SMALL_RTOS_LIST                                                   06/03/2021 20:39:14 PAGE 5   
+
+ 241   3              }
+ 242   2              temp_node->next_=NULL;
+ 243   2              q->next_=temp_node;
+ 244   2          }
+ 245   1      }
+ 246          
+ 247          
+ 248          
+ 249          
+ 250          
+ 251          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   2518    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =     63    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

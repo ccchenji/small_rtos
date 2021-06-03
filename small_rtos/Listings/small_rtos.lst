@@ -1,0 +1,84 @@
+A51 MACRO ASSEMBLER  SMALL_RTOS                                                           06/03/2021 20:39:14 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\small_rtos.obj
+ASSEMBLER INVOKED BY: D:\keil\C51\BIN\A51.EXE os\small_rtos.asm SET(LARGE) DEBUG PRINT(.\Listings\small_rtos.lst) OBJECT
+                      (.\Objects\small_rtos.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     PUBLIC  ?C_STARTUP              ;向外部申明，ROM运行起始位置
+                       2     EXTRN  IDATA(process_stack)
+                       3     EXTRN  CODE(?C_START)
+                       4     EXTRN  CODE(TaskSwitch)
+                       5     
+0000                   6     ?C_STARTUP:
+0000                   7     ORG     0x0000
+0000 0200C9            8             LJMP    InitSP
+000B                   9     ORG     0x000B
+000B 0200D0           10         LJMP    Timer0Interrupt
+00C9                  11     ORG     0x00C9
+00C9                  12     InitSP:
+00C9 758100   F       13         MOV     SP,#(process_stack)
+00CC 020000   F       14         JMP     ?C_START
+00CF 22               15     RET
+                      16     
+00D0                  17     Timer0Interrupt:
+00D0 C0E0             18         PUSH    ACC
+00D2 C0F0             19         PUSH    B
+00D4 C0D0             20         PUSH    PSW
+00D6 C083             21         PUSH    DPH
+00D8 C082             22         PUSH    DPL
+00DA C000             23         PUSH    0x00
+00DC C001             24         PUSH    0x01
+00DE C002             25         PUSH    0x02
+00E0 C003             26         PUSH    0x03
+00E2 C004             27         PUSH    0x04
+00E4 C005             28         PUSH    0x05
+00E6 C006             29         PUSH    0x06
+00E8 C007             30         PUSH    0x07
+00EA 120000   F       31         LCALL   TaskSwitch
+00ED D007             32         POP     0x07
+00EF D006             33         POP     0x06
+00F1 D005             34         POP     0x05
+00F3 D004             35         POP     0x04
+00F5 D003             36         POP     0x03
+00F7 D002             37         POP     0x02
+00F9 D001             38         POP     0x01
+00FB D000             39         POP     0x00
+00FD D082             40         POP     DPL
+00FF D083             41         POP     DPH
+0101 D0D0             42         POP     PSW
+0103 D0F0             43         POP     B
+0105 D0E0             44         POP     ACC
+0107 32               45     RETI
+                      46     
+                      47     END
+                             
+A51 MACRO ASSEMBLER  SMALL_RTOS                                                           06/03/2021 20:39:14 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+?C_START . . . . .  C ADDR   -----       EXT
+?C_STARTUP . . . .  C ADDR   0000H   A   
+ACC. . . . . . . .  D ADDR   00E0H   A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+DPH. . . . . . . .  D ADDR   0083H   A   
+DPL. . . . . . . .  D ADDR   0082H   A   
+INITSP . . . . . .  C ADDR   00C9H   A   
+PROCESS_STACK. . .  I ADDR   -----       EXT
+PSW. . . . . . . .  D ADDR   00D0H   A   
+SP . . . . . . . .  D ADDR   0081H   A   
+TASKSWITCH . . . .  C ADDR   -----       EXT
+TIMER0INTERRUPT. .  C ADDR   00D0H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

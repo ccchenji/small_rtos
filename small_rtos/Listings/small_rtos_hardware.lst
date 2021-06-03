@@ -1,0 +1,109 @@
+C51 COMPILER V9.60.0.0   SMALL_RTOS_HARDWARE                                               06/03/2021 20:39:14 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE SMALL_RTOS_HARDWARE
+OBJECT MODULE PLACED IN .\Objects\small_rtos_hardware.obj
+COMPILER INVOKED BY: D:\keil\C51\BIN\C51.EXE os\small_rtos_hardware.c LARGE OPTIMIZE(0,SPEED) BROWSE DEBUG OBJECTEXTEND 
+                    -PRINT(.\Listings\small_rtos_hardware.lst) TABS(2) OBJECT(.\Objects\small_rtos_hardware.obj)
+
+line level    source
+
+   1          /*
+   2           * @FileName: small_rtos_hardware.c
+   3           * @Author: chen jixuan
+   4           * @Date: 2021-05-04 17:22:44
+   5           * @Version: 当前版本
+   6           * @Description: 系统硬件初始化
+   7           */
+   8          
+   9          #include "small_rtos_hardware.h"
+  10          
+  11          /**
+  12           * @Name: HardwareInit
+  13           * @Description: 硬件初始化
+  14           * @Date: 2021-05-08 20:11:14
+  15           * @Author: chen jixuan
+  16           * @Param: none
+  17           * @Return: none
+  18           */
+  19          void HardwareInit()
+  20          {
+  21   1        //串口初始化
+  22   1        Uart1Init();
+  23   1        //定时器0初始化
+  24   1        Timer0Init(TIMER0_SET);
+  25   1      }
+  26          /**
+  27           * @Name: UartInit()
+  28           * @Description: 串口1初始化
+  29           * @Date: 2021-05-04 17:29:18
+  30           * @Author: chen jixuan
+  31           * @Param: none
+  32           * @Return: none
+  33           */
+  34          void Uart1Init(void)
+  35          {
+  36   1          SCON = 0x50;  //8位数据,可变波特率
+  37   1          AUXR |= 0x40; //定时器时钟1T模式
+  38   1          AUXR &= 0xFE; //串口1选择定时器1为波特率发生器
+  39   1          TMOD &= 0x0F; //设置定时器模式
+  40   1          TL1 = 0xE0;   //设置定时初始值
+  41   1          TH1 = 0xFE;   //设置定时初始值
+  42   1          ET1 = 0;      //禁止定时器%d中断
+  43   1          TR1 = 1;      //定时器1开始计时
+  44   1      }
+  45          
+  46          /**
+  47           * @Name: putchar()
+  48           * @Description: 重写printf底层函数
+  49           * @Date: 2021-05-04 17:29:48
+  50           * @Author: chen jixuan
+  51           * @param {char} dat
+  52           * @Return: {char} dat
+  53           */
+  54          int8 putchar(int8 dat)
+C51 COMPILER V9.60.0.0   SMALL_RTOS_HARDWARE                                               06/03/2021 20:39:14 PAGE 2   
+
+  55          {
+  56   1          ES = 0;
+  57   1          SBUF = dat;
+  58   1          while (!TI);
+  59   1          TI = 0;
+  60   1          ES = 1;
+  61   1          return dat;
+  62   1      }
+  63          
+  64          /**
+  65           * @Name: Timer0Init()
+  66           * @Description: 定时器0初始化->用于任务切换
+  67           * @Date: 2021-05-04 17:31:16
+  68           * @Author: chen jixuan
+  69           * @param {uint32} tim
+  70           * @Return: none
+  71           */
+  72          void Timer0Init(uint32 tim)
+  73          {
+  74   1          //定时器0初始化，定时器零用于任务切换
+  75   1          AUXR |= 0x80;   //定时器时钟1T模式
+  76   1          TMOD &= 0xF0;   //设置定时器模式
+  77   1          TL0 = tim;      //设置定时初值
+  78   1          TH0 = tim >> 8; //设置定时初值
+  79   1          TF0 = 0;        //清除TF0标志
+  80   1          TR0 = 1;        //定时器0开始计时
+  81   1          ET0 = 1;        //使能定时器中断
+  82   1          EA  = 1;        //开启总中断
+  83   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    123    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =      5    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

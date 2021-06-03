@@ -1,0 +1,267 @@
+C51 COMPILER V9.60.0.0   MY_LIST                                                           04/29/2021 20:44:08 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE MY_LIST
+OBJECT MODULE PLACED IN .\Objects\my_list.obj
+COMPILER INVOKED BY: D:\keil\C51\BIN\C51.EXE os\my_list.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\m
+                    -y_list.lst) TABS(2) OBJECT(.\Objects\my_list.obj)
+
+line level    source
+
+   1          /*
+   2           * @FileName: 文件名称
+   3           * @Author: chen jixuan
+   4           * @Date: 2021-03-26 11:19:59
+   5           * @Version: 当前版本
+   6           * @Description: 对该文件的描述
+   7           */
+   8          
+   9          #include "my_list.h"
+*** ERROR C129 IN LINE 32 OF os\my_list.h: missing ';' before 'InitList'
+  10          
+  11          
+  12          /**
+  13           * @Name: InitList
+  14           * @Description: 初始化列表,未初始化的列表要求赋值为NULL,不然该函数无法初始化
+  15           * @Date: 2021-03-26 20:12:07
+  16           * @Author: chen jixuan
+  17           * @Return: 初始化成功返回true,失败返回false
+  18           * @param {PListNode} L
+  19           */
+  20          bool InitList(PRadarList *now_list)
+  21          {
+  22              if (*now_list==NULL)
+  23              {
+  24          
+  25                  (*now_list) = (PRadarList)malloc(sizeof(RadarList));
+  26                  (*now_list)->next_ = NULL;
+  27                  (*now_list)->num_ = 0; //当前列表的节点数
+  28                  (*now_list)->is_init_ = true;
+  29                  return true;
+  30              }
+  31              else
+  32              {
+  33                  return false;
+  34              }
+  35          }
+  36          /**
+  37           * @Name: DestroyList
+  38           * @Description: 销毁列表
+  39           * @Date: 2021-03-26 20:22:13
+  40           * @Author: chen jixuan
+  41           * @Return:  成功返回true,失败返回false
+  42           * @param {PListNode} now_list
+  43           */
+  44          bool DestroyList(PRadarList *now_list)
+  45          {
+  46              PListNode node;
+  47              PListNode temp;
+  48              if((*now_list)!=NULL&&(*now_list)->is_init_==true)
+  49              {
+  50                  node = (*now_list)->next_;
+  51                  free((*now_list));
+  52                  (*now_list)=NULL;
+  53                  while (node)
+C51 COMPILER V9.60.0.0   MY_LIST                                                           04/29/2021 20:44:08 PAGE 2   
+
+  54                  {
+  55                      temp = node->next_;
+  56                      free(node);
+  57                      node = temp;
+  58                  }
+  59                  return true;
+  60              }
+  61              else
+  62              {
+  63                  return false;
+  64              }
+  65          }
+  66          /**
+  67           * @Name: ClearList
+  68           * @Description: 
+  69           * @Date: 2021-03-27 09:51:01
+  70           * @Author: chen jixuan
+  71           * @Return: 成功返回true,失败返回false 
+  72           * @param {PListNode} now_list
+  73           */
+  74          bool ClearList(PRadarList now_list)
+  75          {
+  76              PListNode p,q;
+  77              if(now_list!=NULL&&now_list->is_init_==true)
+  78              {
+  79                  p = now_list->next_;
+  80                  while (p)
+  81                  {
+  82                      q = p->next_;
+  83                      free(p);
+  84                      p = q;
+  85                  }
+  86                  now_list->is_init_ = true;
+  87                  now_list->next_ = NULL;
+  88                  now_list->num_ = 0;
+  89                  return true;
+  90              }
+  91              else
+  92                  return false;
+  93          }
+  94          
+  95          /**
+  96           * @Name: ListAppend
+  97           * @Description: 向链表后面添加数据
+  98           * @Date: 2021-03-29 17:01:06
+  99           * @Author: chen jixuan
+ 100           * @Return: 成功返回true,失败返回false
+ 101           * @param {PRadarList} now_list
+ 102           * @param {ListType} data
+ 103           */
+ 104          bool ListAppend(PRadarList now_list,ListType *data)
+ 105          {
+ 106              PListNode p;
+ 107              if(now_list!=NULL&&now_list->is_init_)
+ 108              {
+ 109                  p=now_list->next_;
+ 110                  if(now_list->next_==NULL)
+ 111                  {
+ 112                      now_list->next_=(PListNode)malloc(sizeof(ListNode));
+ 113                      now_list->next_->data_=*data;
+ 114                      now_list->next_->next_=NULL;
+ 115                      now_list->num_=1;
+C51 COMPILER V9.60.0.0   MY_LIST                                                           04/29/2021 20:44:08 PAGE 3   
+
+ 116                  }
+ 117                  else
+ 118                  {
+ 119                      while(p->next_)
+ 120                      {
+ 121                          p=p->next_;
+ 122                      }
+ 123                      p->next_=(PListNode)malloc(sizeof(ListNode));
+ 124                      p->next_->data_=*data;
+ 125                      p->next_->next_=NULL;
+ 126                      now_list->num_+=1;
+ 127                  }
+ 128                  return true;
+ 129              }
+ 130              return false;
+ 131          }
+ 132          
+ 133          /**
+ 134           * @Name: ListShow
+ 135           * @Description: 显示列表的所有元素
+ 136           * @Date: 2021-03-29 17:34:53
+ 137           * @Author: chen jixuan
+ 138           * @Return: none
+ 139           * @param {PRadarList} now_list
+ 140           */
+ 141          void ListShow(PRadarList now_list,void(*show)(ListType*))
+ 142          {
+ 143              PListNode p;
+ 144              if(now_list!=NULL&&now_list->is_init_)
+ 145              {
+ 146                  p=now_list->next_;
+ 147                  if(now_list->num_==0)
+ 148                  {
+ 149                      printf("no data!!!!");
+ 150                  }
+ 151                  else
+ 152                  {
+ 153                      while(p)
+ 154                      {
+ 155                          show(&(p->data_));
+ 156                          p=p->next_;
+ 157                      }
+ 158                  }
+ 159              }
+ 160              else
+ 161              {
+ 162                  printf("no init!!!");
+ 163              }
+ 164          }
+ 165          /**
+ 166           * @Name: IntShow
+ 167           * @Description:用于显示Int型的列表 
+ 168           * @Date: 2021-03-29 17:41:00
+ 169           * @Author: chen jixuan
+ 170           * @Return: none
+ 171           * @param {PListNode} now_node
+ 172           */
+ 173          void IntShow(ListType* data)
+ 174          {
+ 175              printf("data=%d\r\n",*data);
+ 176          }
+ 177          
+C51 COMPILER V9.60.0.0   MY_LIST                                                           04/29/2021 20:44:08 PAGE 4   
+
+ 178          /**
+ 179           * @Name: ListDelete
+ 180           * @Description: 删除列表列的和给定元素相等的元素
+ 181           * @Date: 2021-03-30 14:48:33
+ 182           * @Author: chen jixuan
+ 183           * @Return: 返回删除元素的后一个元素
+ 184           * @param {PRadarList} now_list
+ 185           * @param {ListType} now_data
+ 186           */
+ 187          PListNode ListDelete(PRadarList now_list,ListType* now_data,bool(*CompareListType)(ListType*,ListType*))
+ 188          {
+ 189              PListNode p;
+ 190              PListNode q;
+ 191              if(now_list!=NULL&&now_list->is_init_)
+ 192              {
+ 193                  p=now_list->next_;
+ 194                  //对第一个节点单独处理
+ 195                  if(now_list->next_!=NULL)
+ 196                  {
+ 197                      if(CompareListType(&p->data_,now_data))
+ 198                      {
+ 199                          now_list->next_=p->next_;
+ 200                          free(p);
+ 201                          now_list->num_-=1;
+ 202                          return now_list->next_;
+ 203                      }
+ 204                  }
+ 205                  else
+ 206                      return NULL;
+ 207                  while(p->next_)
+ 208                  {
+ 209                      q=p;
+ 210                      p=p->next_;
+ 211                      if(CompareListType(&p->data_,now_data))
+ 212                      {
+ 213                          q->next_=p->next_;
+ 214                          free(p);
+ 215                          now_list->num_-=1;
+ 216                          return q->next_;
+ 217                      }
+ 218                  }
+ 219              }
+ 220              return NULL;
+ 221          }
+ 222          
+ 223          /**
+ 224           * @Name: IntCompare
+ 225           * @Description: 用于对int形数据进行比较
+ 226           * @Date: 2021-03-30 15:17:21
+ 227           * @Author: chen jixuan
+ 228           * @Return: 相等返回true,失败返回false
+ 229           * @param {ListType} first_data
+ 230           * @param {ListType} second_data
+ 231           */
+ 232          bool IntCompare(int* first_data,int* second_data)
+ 233          {
+ 234              if((*first_data)==(*second_data))
+ 235                  return true;
+ 236              else
+ 237                  return false;
+ 238          }
+ 239          
+C51 COMPILER V9.60.0.0   MY_LIST                                                           04/29/2021 20:44:08 PAGE 5   
+
+ 240          
+ 241          
+ 242          
+ 243          
+ 244          
+ 245          
+ 246          
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)
